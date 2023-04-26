@@ -14,7 +14,6 @@ const mask = (selector) => {
             range.select()
         }
     }
-    console.log(1);
     function createMask(event) {
         let matrix = '+7 (___) ___ __ __',
             i = 0,

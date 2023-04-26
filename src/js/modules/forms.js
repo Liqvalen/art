@@ -1,4 +1,4 @@
-// import checkNumInputs from "./checkNumInputs"
+import {postData} from "../services/requests"
 const forms = () => {
     const form = document.querySelectorAll('form'),
           inputs = document.querySelectorAll('input'),
@@ -17,17 +17,6 @@ const forms = () => {
         designer: 'assets/server.php',
         question: 'assets/question.php'
     }
-    
-    const postData = async (url, data) => {
-        
-        let res = await fetch(url, {
-            method: "POST",
-            body: data
-        })
-
-        return await res.text()
-    }
-    console.log(1);
     const clearInputs = () => {
         inputs.forEach(item => {
             item.value = ''
@@ -42,8 +31,9 @@ const forms = () => {
     upload.forEach(item => {
         item.addEventListener('input', () => {
             console.log(item.files[0]);
-            let arr = item.files[0].name.split('.')
+            
             let dots
+            let arr = item.files[0].name.split('.')
             arr[0].length > 6 ? dots = '...' : dots = '.'
             const name = arr[0].substring(0, 6) + dots + arr[1]
             item.previousElementSibling.textContent = name
@@ -72,6 +62,13 @@ const forms = () => {
             statusMessage.appendChild(textMessage)
 
             const formData = new FormData(item)
+
+            // if (item.getAttribute('data-calc')) {
+            //     for (let key in state) {
+            //         formData.append(key, state[key])
+            //     }
+            // }
+            
             let api
             item.closest('.popup-design') || 
             item.classList.contains('calc-form') ? 
